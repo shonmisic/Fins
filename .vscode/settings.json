@@ -1,0 +1,10 @@
+{
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.triggerExpansionOnTab": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.useTabs": true,
+  "typescriptHero.imports.organizeOnSave": true,
+  "html.format.endWithNewline": true
+}
