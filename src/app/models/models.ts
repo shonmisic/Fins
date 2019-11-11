@@ -1,5 +1,10 @@
-interface Expenditure {
+export interface Expenditure {
   name: string;
   amount: number;
-  currency: string;
+  currency: Currency | string;
+}
+
+export enum Currency {
+  RSD,
+  EUR,
 }

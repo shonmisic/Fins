@@ -1,11 +1,13 @@
-<div class="card">
-  <div class="card-header d-flex justify-content-between bg-warning">
-    <h4 class="card-title d-inline my-auto">{{expenditureName}}...</h4>
-    <button class="btn btn-danger d-inline"><fa-icon [icon]="faWindowClose"></fa-icon></button>
-  </div>
-  <div class="card-body">
+<mat-card class="expenditures-card">
+  <mat-card-header>
+    <mat-card-title>
+      <h4 class="card-title d-inline my-auto">{{ expenditureName }}...</h4>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider [inset]="true"></mat-divider>
     <h5 class="card-text text-right text-muted">
-      <i>-{{amountSpent}} {{currency}}</i>
+      <i>-{{ amountSpent | currency: currency }}</i>
     </h5>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>

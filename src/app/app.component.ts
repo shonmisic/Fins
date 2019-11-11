@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
+
+import { Currency, Expenditure } from './models/models';
+import { ExpendituresService } from './services/expenditures.service';
 
 @Component({
   selector: 'app-root',
@@ -7,22 +11,29 @@ import { of } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Fins';
-  expenditures$ = of([
-    <Expenditure>{
-      name: 'Unniver',
-      amount: 100,
-      currency: 'USD'
-    },
-    <Expenditure>{
-      name: 'Maxi',
-      amount: 300,
-      currency: 'USD'
-    },
-    <Expenditure>{
-      name: 'Mesara',
-      amount: 1400,
-      currency: 'USD'
-    },
-  ]);
+  expenditures$: Observable<Expenditure[]>;
+
+  constructor(private expendituresService: ExpendituresService) {}
+
+  ngOnInit() {
+    this.expenditures$ = this.getAllExpenditures();
+  }
+
+  private getAllExpenditures(): Observable<Expenditure[]> {
+    return this.expendituresService.getAllExpenditures().pipe(
+      take(1),
+      switchMap(e =>
+        of(
+          e.map(
+            e =>
+              <Expenditure>{
+                amount: e.amount,
+                name: e.name,
+                currency: Currency[e.currency],
+              }
+          )
+        )
+      )
+    );
+  }
 }
